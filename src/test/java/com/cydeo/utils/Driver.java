@@ -30,7 +30,7 @@ public class Driver {
                     desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 3");
                     desiredCapabilities.setCapability(MobileCapabilityType.APP, "https://cybertek-appium.s3.amazonaws.com/calculator.apk");
                     try {
-                        url = new URL("http://localhost:4723/wd/hub");
+                        url = new URL("http://localhost:4723/");
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     }
