@@ -20,9 +20,7 @@ public class SauceLabTestLocal {
         driver.findElement(MobileBy.AccessibilityId("test-Password")).sendKeys("secret_sauce");
         // submit
         driver.findElement(MobileBy.AccessibilityId("test-LOGIN")).click();
-        Thread.sleep(5000);
-        MobileElement el4 = (MobileElement) driver.findElementByXPath("(//android.widget.TextView[@content-desc=\"test-Item title\"])[1]");
-        el4.click();
-       // Driver.closeDriver();
+
+        Driver.closeDriver();
     }
 }

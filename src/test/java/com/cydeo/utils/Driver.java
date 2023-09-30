@@ -3,6 +3,7 @@ package com.cydeo.utils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
@@ -106,6 +107,30 @@ public class Driver {
                     }
                     driver = new AndroidDriver(url, capss);
                     break;
+                case "iphone-saucelab-remote":
+                    MutableCapabilities capsI = new MutableCapabilities();
+                    capsI.setCapability("platformName", "iOS");
+                    capsI.setCapability("appium:deviceName", "iPhone Simulator");
+                    capsI.setCapability("appium:deviceOrientation", "portrait");
+                    capsI.setCapability("appium:platformVersion", "current_major");
+                    capsI.setCapability("appium:automationName", "XCUITest");
+                    capsI.setCapability("appium:app","https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+                    capsI.setCapability("appPackage","com.swaglabsmobileapp");
+                    capsI.setCapability("appActivity","com.swaglabsmobileapp.SplashActivity");
+                    MutableCapabilities sauceOptionsI = new MutableCapabilities();
+                    sauceOptionsI.setCapability("username", "oauth-sdetoscar-2ca62");
+                    sauceOptionsI.setCapability("accessKey", "Your personal access code");
+                    sauceOptionsI.setCapability("build", "CydeoIphone123");
+                    sauceOptionsI.setCapability("name", "Saucelab Iphone Test");
+                    capsI.setCapability("sauce:options", sauceOptionsI);
+
+
+                    try {
+                        url = new URL("https://ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    driver = new IOSDriver(url, capsI);
             }
         }
         return driver;
