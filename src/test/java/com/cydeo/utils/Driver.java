@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -79,6 +80,31 @@ public class Driver {
                         throw new RuntimeException(e);
                     }
                     driver = new AndroidDriver<>(url,saucelabLocal);
+                    break;
+                case "android-saucelab-remote":
+                    MutableCapabilities capss = new MutableCapabilities();
+                    capss.setCapability("platformName", "Android");
+                    capss.setCapability("appium:deviceName", "Samsung Galaxy S10 WQHD GoogleAPI Emulator");
+                    capss.setCapability("appium:deviceOrientation", "portrait");
+                    capss.setCapability("appium:platformVersion", "current_major");
+                    capss.setCapability("appium:automationName", "UiAutomator2");
+                    capss.setCapability("appium:app","https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+                    capss.setCapability("appPackage","com.swaglabsmobileapp");
+                    capss.setCapability("appActivity","com.swaglabsmobileapp.SplashActivity");
+                    MutableCapabilities sauceOptions = new MutableCapabilities();
+                    sauceOptions.setCapability("username", "oauth-sdetoscar-2ca62");
+                    sauceOptions.setCapability("accessKey", "personal access key");
+                    sauceOptions.setCapability("build", "Cydeo123");
+                    sauceOptions.setCapability("name", "B29_Native_App_Test");
+                    capss.setCapability("sauce:options", sauceOptions);
+
+
+                    try {
+                        url = new URL("https://ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    driver = new AndroidDriver(url, capss);
                     break;
             }
         }
