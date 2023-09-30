@@ -71,6 +71,8 @@ public class Driver {
                     saucelabLocal.setCapability(MobileCapabilityType.PLATFORM_VERSION,"10");
                     saucelabLocal.setCapability(MobileCapabilityType.DEVICE_NAME,"Pixel 3");
                     saucelabLocal.setCapability(MobileCapabilityType.APP,"/Users/oscar/IdeaProjects/B29_AppiumTests/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+                    saucelabLocal.setCapability("appPackage","com.swaglabsmobileapp");
+                    saucelabLocal.setCapability("appActivity","com.swaglabsmobileapp.SplashActivity");
                     try {
                         url = new URL("http://localhost:4723/"); // if you are using Appium 1 add "wd/hub/" as path paramater to your URL
                     } catch (MalformedURLException e) {
