@@ -3,13 +3,14 @@ package com.cydeo.tests;
 import com.cydeo.utils.Driver;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.jupiter.api.Test;
 
 public class SauceLabTestLocal {
     @Test
-    public void LoginTest(){
-        AppiumDriver driver = Driver.getDriver();
+    public void LoginTest() throws InterruptedException {
+        AppiumDriver<MobileElement> driver = Driver.getDriver();
 
         System.out.println(driver.getDeviceTime());
 
@@ -19,7 +20,9 @@ public class SauceLabTestLocal {
         driver.findElement(MobileBy.AccessibilityId("test-Password")).sendKeys("secret_sauce");
         // submit
         driver.findElement(MobileBy.AccessibilityId("test-LOGIN")).click();
-
-        Driver.closeDriver();
+        Thread.sleep(5000);
+        MobileElement el4 = (MobileElement) driver.findElementByXPath("(//android.widget.TextView[@content-desc=\"test-Item title\"])[1]");
+        el4.click();
+       // Driver.closeDriver();
     }
 }
