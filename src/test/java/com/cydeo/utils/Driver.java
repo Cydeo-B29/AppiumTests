@@ -22,7 +22,7 @@ public class Driver {
         String platform = ConfigurationReader.getProperty("platform");
         if (Objects.isNull(driver)) {
             switch (platform) {
-                case "android":
+                case "android-calculator":
                     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
                     desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
                     desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
@@ -63,6 +63,20 @@ public class Driver {
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     }
+                    break;
+                case "android-saucelab":
+                    DesiredCapabilities saucelabLocal = new DesiredCapabilities();
+                    saucelabLocal.setCapability("appium:automationName","UiAutomator2");
+                    saucelabLocal.setCapability(MobileCapabilityType.PLATFORM_NAME,Platform.ANDROID);
+                    saucelabLocal.setCapability(MobileCapabilityType.PLATFORM_VERSION,"10");
+                    saucelabLocal.setCapability(MobileCapabilityType.DEVICE_NAME,"Pixel 3");
+                    saucelabLocal.setCapability(MobileCapabilityType.APP,"/Users/oscar/IdeaProjects/B29_AppiumTests/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+                    try {
+                        url = new URL("http://localhost:4723/"); // if you are using Appium 1 add "wd/hub/" as path paramater to your URL
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    driver = new AndroidDriver<>(url,saucelabLocal);
                     break;
             }
         }
